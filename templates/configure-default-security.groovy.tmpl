@@ -1,0 +1,14 @@
+import jenkins.model.*
+import hudson.security.*
+
+def instance = Jenkins.getInstance()
+
+def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+hudsonRealm.createAccount("{{getv "/self/service/metadata/jenkinsprojectaccount"}}","{{getv "/self/service/metadata/jenkinsprojectpassword"}}")
+instance.setSecurityRealm(hudsonRealm)
+
+def strategy = new GlobalMatrixAuthorizationStrategy()
+strategy.add(Jenkins.ADMINISTER, "{{getv "/self/service/metadata/jenkinsprojectaccount"}}")
+instance.setAuthorizationStrategy(strategy)
+
+instance.save()

@@ -1,0 +1,7 @@
+[template]
+src="configure-default-security.groovy.tmpl"
+dest="/usr/share/jenkins/ref/init.groovy.d/configure-default-security.groovy"
+keys= [
+  "/self/service/metadata/jenkinsprojectaccount",
+  "/self/service/metadata/jenkinsprojectpassword",
+]
